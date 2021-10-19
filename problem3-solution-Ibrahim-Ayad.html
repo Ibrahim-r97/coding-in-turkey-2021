@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+  <h2>Fridge Items</h2>
+  <table id="my-table">
+    <thead>
+      <td>
+        <b>Item</b>
+      </td>
+      <td>
+        <b>Count</b>
+      </td>
+      <td>
+        <b>Remove</b>
+      </td>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cucumber</td>
+        <td>3</td>
+        <td><button onClick="remove(this)">X</button></td>
+      </tr>
+      <tr>
+        <td>Lettuce</td>
+        <td>5</td>
+        <td><button onClick="remove(this)">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+  <input type="text" id="textBox">
+  <button onClick="add()">Add</button>
+</body>
+<script>
+
+  function remove(event) {
+    // event.parentNode.parentNode.removeChild(event.parentNode);
+    event.parentNode.parentNode.parentNode.removeChild(event.parentNode.parentNode);
+  }
+  function msgprint() {
+    alert("You are Successfully Called the JavaScript function");
+  }
+  function add(mytable) {
+    var inputValue = document.getElementById('textBox').value;
+    const itemArr = inputValue.split(' ');
+    // Get a reference to the table
+    var tbodyRef = document.getElementById('my-table').getElementsByTagName('tbody')[0];
+    if (itemArr.length == 2 && (itemArr[0] >= 'A' && itemArr[0] <= 'Z') || (itemArr[0] >= 'a' && itemArr[0] <= 'z') && itemArr[1] >= '0' && itemArr[1] <= '9') {
+      // Insert a row at the end of the table
+      let newRow = tbodyRef.insertRow();
+      for (let i = 0; i < itemArr.length; i++) {
+        // Insert a cell in the row at index i
+        let newCell = newRow.insertCell(i);
+
+        // Append a text node to the cell
+        var newText = document.createTextNode(itemArr[i]);
+        newCell.appendChild(newText);
+      }
+      let btn = document.createElement("button");
+      btn.innerHTML = "X";
+      btn.addEventListener("click", function () {
+        remove(this);
+      });
+      let newsCell = newRow.insertCell();
+      // Append a text node to the cell
+      newsCell.appendChild(btn);
+      //document.body.appendChild(btn);
+    }
+  }
+</script>
+<style>
+  td {
+    padding-right: 50px;
+  }
+</style>
+
+</html>
